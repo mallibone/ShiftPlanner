@@ -1,21 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Views;
 using ShiftPlanner.Models;
 using ShiftPlanner.Services;
+using ShiftPlanner.Utils;
 
 namespace ShiftPlanner.ViewModels
 {
     class MainViewModel:ViewModelBase
     {
         private readonly ShiftService _shiftService;
+        private readonly INavigationService _navigationService;
         private IEnumerable<DayViewModel> _days;
         private DateTime _offsetDate;
 
-        public MainViewModel(ShiftService shiftService)
+        public MainViewModel(ShiftService shiftService, INavigationService navigationService)
         {
             if (shiftService == null) throw new ArgumentNullException(nameof(shiftService));
+            if (navigationService == null) throw new ArgumentNullException(nameof(navigationService));
+
             _shiftService = shiftService;
+            _navigationService = navigationService;
 
             _offsetDate = DateTime.Today;
             Days = StubInit();
@@ -57,6 +63,11 @@ namespace ShiftPlanner.ViewModels
         public IEnumerable<ShiftType> AvailableShiftTypes()
         {
             return _shiftService.GetShiftTypes();
+        }
+
+        public void ItemSelected(DayViewModel selectedItem)
+        {
+            _navigationService.NavigateTo(PageNavigationConstants.ShiftDetailPage);
         }
     }
 }

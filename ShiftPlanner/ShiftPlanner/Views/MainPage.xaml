@@ -5,7 +5,7 @@
              x:Class="ShiftPlanner.Views.MainPage"
              Title="{Binding DisplayedMonth}">
 
-  <ListView ItemsSource="{Binding Days}" Margin="16,0">
+  <ListView x:Name="MonthlyShifts" ItemsSource="{Binding Days}" Margin="16,0" ItemSelected="ListView_OnItemSelected">
     <ListView.ItemTemplate>
       <DataTemplate>
         <ViewCell>
@@ -24,5 +24,4 @@
       </DataTemplate>
     </ListView.ItemTemplate>
   </ListView>
-
 </ContentPage>

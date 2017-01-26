@@ -16,9 +16,10 @@ namespace ShiftPlanner.Services
         {
             _shiftTypes = new List<ShiftType>
             {
-                new ShiftType {Id = 0, Name = "Early Shift" },
-                new ShiftType {Id = 1, Name = "Late Shift" },
-                new ShiftType {Id = 2, Name = "Night Shift" },
+                new ShiftType {Id = 0, Name = "Day Off" },
+                new ShiftType {Id = 1, Name = "Early Shift" },
+                new ShiftType {Id = 2, Name = "Late Shift" },
+                new ShiftType {Id = 3, Name = "Night Shift" },
             };
         }
 
