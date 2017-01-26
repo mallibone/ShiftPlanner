@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Practices.ServiceLocation;
 using Xamarin.Forms;
 
-namespace ShiftPlanner
+namespace ShiftPlanner.Views
 {
     public partial class MainPage : ContentPage
     {
         public MainPage()
         {
+            BindingContext = App.Locator.MainViewModel;
+
             InitializeComponent();
         }
     }

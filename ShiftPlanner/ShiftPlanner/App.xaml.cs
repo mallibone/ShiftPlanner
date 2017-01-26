@@ -9,11 +9,14 @@ namespace ShiftPlanner
 {
     public partial class App : Application
     {
+        private static Locator _locator;
+        internal static Locator Locator => _locator ?? (_locator = new Locator());
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new ShiftPlanner.MainPage();
+            MainPage = new NavigationPage(new Views.MainPage());
         }
 
         protected override void OnStart()

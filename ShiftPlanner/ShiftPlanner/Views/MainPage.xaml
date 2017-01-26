@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ShiftPlanner"
+             x:Class="ShiftPlanner.Views.MainPage"
+             Title="{Binding DisplayedMonth}">
+
+  <ListView ItemsSource="{Binding Days}" Margin="16,0">
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <ViewCell>
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+          <StackLayout Orientation="Horizontal" Grid.Column="0">
+            <Label Text="{Binding WeekDay}" FontSize="14" FontAttributes="Bold" VerticalOptions="Center"/>
+            <!--<Picker Title="Select Shift" SelectedIndex="{Binding SelectedShift}"></Picker>-->
+          </StackLayout>
+          <Label Text="{Binding SelectedShiftTypeText}" HorizontalTextAlignment="Start" Margin="16,0" Grid.Column="1" VerticalOptions="Center" />
+        </Grid>
+        </ViewCell>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView>
+
+</ContentPage>
