@@ -4,8 +4,6 @@ using System.Linq;
 
 using Foundation;
 using Microsoft.Azure.Mobile;
-using Microsoft.Azure.Mobile.Analytics;
-using Microsoft.Azure.Mobile.Crashes;
 using UIKit;
 
 namespace ShiftPlanner.iOS
