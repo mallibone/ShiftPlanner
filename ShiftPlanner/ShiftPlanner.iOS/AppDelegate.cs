@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Analytics;
+using Microsoft.Azure.Mobile.Crashes;
 using UIKit;
 
 namespace ShiftPlanner.iOS
@@ -23,6 +26,7 @@ namespace ShiftPlanner.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            MobileCenter.Configure("50738204-da56-44e1-8efa-1ede5b58a77d");
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

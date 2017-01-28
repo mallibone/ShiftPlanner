@@ -5,6 +5,9 @@ using System.Reflection;
 using System.Text;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Analytics;
+using Microsoft.Azure.Mobile.Crashes;
 using ShiftPlanner.Views;
 using Xamarin.Forms;
 
@@ -18,6 +21,8 @@ namespace ShiftPlanner
         public App()
         {
             InitializeComponent();
+
+            MobileCenter.Start(typeof(Analytics), typeof(Crashes));
 
             MainPage = InitializeNavigationAndInitialPage();
         }

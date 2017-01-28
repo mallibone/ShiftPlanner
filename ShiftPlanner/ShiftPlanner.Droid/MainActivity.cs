@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Microsoft.Azure.Mobile;
 
 namespace ShiftPlanner.Droid
 {
@@ -20,6 +21,7 @@ namespace ShiftPlanner.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            MobileCenter.Configure("9c737409-4948-470f-ab09-27ea986377d0");
             LoadApplication(new App());
         }
     }
