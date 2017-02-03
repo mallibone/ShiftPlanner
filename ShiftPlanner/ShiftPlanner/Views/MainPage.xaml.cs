@@ -14,14 +14,5 @@ namespace ShiftPlanner.Views
         }
 
         private MainViewModel Vm => App.Locator.MainViewModel;
-
-        private void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            if (e.SelectedItem == null) return;
-
-            Vm.ItemSelected((DayViewModel) e.SelectedItem);
-
-            MonthlyShifts.SelectedItem = null;
-        }
     }
 }
