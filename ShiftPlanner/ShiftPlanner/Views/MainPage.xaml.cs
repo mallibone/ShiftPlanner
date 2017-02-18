@@ -13,6 +13,11 @@ namespace ShiftPlanner.Views
             InitializeComponent();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+
         private MainViewModel Vm => App.Locator.MainViewModel;
     }
 }

@@ -4,6 +4,17 @@
              xmlns:local="clr-namespace:ShiftPlanner"
              x:Class="ShiftPlanner.Views.MainPage"
              Title="{Binding DisplayedMonth}">
+             <ContentPage.Resources>
+               <ResourceDictionary>
+                  <Style x:Key="ShiftSelector" TargetType="Button"> 
+                    <Setter Property="BorderColor" Value="{StaticResource PrimaryColor}" />
+                    <Setter Property="BorderWidth" Value="1" /> 
+                    <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColorLight}" />
+                    <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+                  </Style>
+                 <Style TargetType="Button" BasedOn="{StaticResource ShiftSelector}"></Style>
+               </ResourceDictionary>
+             </ContentPage.Resources>
 
   <ListView x:Name="MonthlyShifts" ItemsSource="{Binding Days}" Margin="16,0">
     <ListView.ItemTemplate>
@@ -16,37 +27,40 @@
           </Grid.ColumnDefinitions>
           <StackLayout Orientation="Horizontal" Grid.Column="0">
             <Label Text="{Binding WeekDay}" FontSize="14" FontAttributes="Bold" VerticalOptions="Center"/>
-            <!--<Picker Title="Select Shift" SelectedIndex="{Binding SelectedShift}"></Picker>-->
           </StackLayout>
           <StackLayout Orientation="Horizontal" Grid.Column="1" HorizontalOptions="EndAndExpand">
-            <Button Text="X" Margin="-5,0" Command="{Binding FreeShiftCommand}" WidthRequest="60" BorderColor="Blue" BorderWidth="1" BackgroundColor="White" TextColor="Blue">
+            <Button Text="X" Margin="-5,0" Command="{Binding FreeShiftCommand}" Style="{DynamicResource ShiftSelector}" WidthRequest="60" x:Name="FreeShiftButton">
               <Button.Triggers>
                 <DataTrigger TargetType="Button" Binding="{Binding FreeShiftSelected}" Value="true">
-                  <Setter Property="BackgroundColor" Value="Blue"/>
+                  <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColorDark}"/>
                   <Setter Property="TextColor" Value="White"/>
+                </DataTrigger>
+                <DataTrigger TargetType="Button" Binding="{Binding FreeShiftSelected}" Value="false">
+                  <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColorLight}"/>
+                  <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}"/>
                 </DataTrigger>
               </Button.Triggers>
             </Button>
-            <Button Text="F" Margin="-5,0" Command="{Binding EarlyShiftCommand}" WidthRequest="60" BorderColor="Blue" BorderWidth="1" BackgroundColor="White" TextColor="Blue">
+            <Button Text="F" Margin="-5,0" Command="{Binding EarlyShiftCommand}" WidthRequest="60">
               <Button.Triggers>
                 <DataTrigger TargetType="Button" Binding="{Binding EarlyShiftSelected}" Value="true">
-                  <Setter Property="BackgroundColor" Value="Blue"/>
+                  <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColorDark}"/>
                   <Setter Property="TextColor" Value="White"/>
                 </DataTrigger>
               </Button.Triggers>
             </Button>
-            <Button Text="S" Margin="-5,0" Command="{Binding LateShiftCommand}" WidthRequest="60" BorderColor="Blue" BorderWidth="1" BackgroundColor="White" TextColor="Blue">
+            <Button Text="S" Margin="-5,0" Command="{Binding LateShiftCommand}" WidthRequest="60">
               <Button.Triggers>
                 <DataTrigger TargetType="Button" Binding="{Binding LateShiftSelected}" Value="true">
-                  <Setter Property="BackgroundColor" Value="Blue"/>
+                  <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColorDark}"/>
                   <Setter Property="TextColor" Value="White"/>
                 </DataTrigger>
               </Button.Triggers>
             </Button>
-            <Button Text="N" Margin="-5,0" Command="{Binding NightShiftCommand}" WidthRequest="60" BorderColor="Blue" BorderWidth="1" BackgroundColor="White" TextColor="Blue">
+            <Button Text="N" Margin="-5,0" Command="{Binding NightShiftCommand}" WidthRequest="60">
               <Button.Triggers>
                 <DataTrigger TargetType="Button" Binding="{Binding NightShiftSelected}" Value="true">
-                  <Setter Property="BackgroundColor" Value="Blue"/>
+                  <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColorDark}"/>
                   <Setter Property="TextColor" Value="White"/>
                 </DataTrigger>
               </Button.Triggers>
