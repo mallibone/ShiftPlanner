@@ -36,6 +36,8 @@ namespace ShiftPlanner
 
             var mainPage = new NavigationPage(new MainPage());
             navService.Initialize(mainPage);
+            mainPage.BarBackgroundColor = (Color)Application.Current.Resources["PrimaryColor"];
+            mainPage.BarTextColor = Color.White;
             return mainPage;
         }
 

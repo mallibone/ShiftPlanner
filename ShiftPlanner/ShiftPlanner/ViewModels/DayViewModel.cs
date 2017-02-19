@@ -70,6 +70,8 @@ namespace ShiftPlanner.ViewModels
             }
         }
 
+        public bool IsWeekendDay => Date.DayOfWeek == DayOfWeek.Saturday || Date.DayOfWeek == DayOfWeek.Sunday;
+
         public RelayCommand FreeShiftCommand { get; set; }
         public RelayCommand EarlyShiftCommand { get; set; }
         public RelayCommand LateShiftCommand { get; set; }

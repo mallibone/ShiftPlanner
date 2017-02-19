@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:ShiftPlanner" xmlns:ios="clr-namespace:UIKit;assembly=Xamarin.iOS;targetPlatform=iOS" x:Class="ShiftPlanner.Views.MainPage" Title="{Binding DisplayedMonth}">
 	<ContentPage.Resources>
 		<ResourceDictionary>
-			<OnPlatform x:TypeArguments="Thickness" Android="-4,0" iOS="-8,0,0,0" WinPhone="2,0" x:Key="ButtonMargin" />
+			<OnPlatform x:TypeArguments="Thickness" Android="-4,0" iOS="-8,8,0,8" WinPhone="2,0" x:Key="ButtonMargin" />
 			<Style x:Key="ShiftSelector" TargetType="Button">
 				<Setter Property="BorderColor" Value="{StaticResource PrimaryColor}" />
 				<Setter Property="BorderWidth" Value="1" />
@@ -15,19 +15,37 @@
 			</Style>
 		</ResourceDictionary>
 	</ContentPage.Resources>
-	<ListView x:Name="MonthlyShifts" ItemsSource="{Binding Days}" Margin="8,0" ItemSelected="Handle_ItemSelected">
+	<ListView x:Name="MonthlyShifts" ItemsSource="{Binding Days}" ItemSelected="Handle_ItemSelected" SeparatorVisibility="None">
 		<ListView.ItemTemplate>
 			<DataTemplate>
 				<ViewCell>
 					<Grid>
+						<Grid.Triggers>
+						<DataTrigger TargetType="Grid" Binding="{Binding IsWeekendDay}" Value="true">
+							<Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
+						</DataTrigger>
+					</Grid.Triggers>
 						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="8" />
 							<ColumnDefinition Width="*" />
 							<ColumnDefinition Width="4*" />
+							<ColumnDefinition Width="8" />
 						</Grid.ColumnDefinitions>
-						<StackLayout Orientation="Horizontal" Grid.Column="0">
-							<Label Text="{Binding WeekDay}" FontSize="14" FontAttributes="Bold" VerticalOptions="Center" />
+						<StackLayout Orientation="Horizontal" Grid.Column="1">
+								<StackLayout.Triggers>
+									<DataTrigger TargetType="StackLayout" Binding="{Binding IsWeekendDay}" Value="true">
+										<Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
+									</DataTrigger>
+								</StackLayout.Triggers>
+							<Label Text="{Binding WeekDay}" FontSize="14" FontAttributes="Bold" VerticalOptions="Center">
+								<Label.Triggers>
+									<DataTrigger TargetType="Label" Binding="{Binding IsWeekendDay}" Value="true">
+										<Setter Property="TextColor" Value="White" />
+									</DataTrigger>
+								</Label.Triggers>
+							</Label>
 						</StackLayout>
-						<Grid Grid.Column="1">
+						<Grid Grid.Column="2">
 							<Button Text="X" Command="{Binding FreeShiftCommand}" Grid.Column="0">
 								<Button.Triggers>
 									<DataTrigger TargetType="Button" Binding="{Binding FreeShiftSelected}" Value="true">
