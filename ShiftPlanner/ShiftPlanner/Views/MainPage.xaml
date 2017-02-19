@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:ShiftPlanner" xmlns:ios="clr-namespace:UIKit;assembly=Xamarin.iOS;targetPlatform=iOS" x:Class="ShiftPlanner.Views.MainPage" Title="{Binding DisplayedMonth}">
 	<ContentPage.Resources>
 		<ResourceDictionary>
-			<OnPlatform x:TypeArguments="Thickness" Android="0,0" iOS="-8,0,0,0" WinPhone="2,0" x:Key="ButtonMargin" />
+			<OnPlatform x:TypeArguments="Thickness" Android="-4,0" iOS="-8,0,0,0" WinPhone="2,0" x:Key="ButtonMargin" />
 			<Style x:Key="ShiftSelector" TargetType="Button">
 				<Setter Property="BorderColor" Value="{StaticResource PrimaryColor}" />
 				<Setter Property="BorderWidth" Value="1" />
