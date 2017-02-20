@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using ShiftPlanner.Models;
 using ShiftPlanner.Services;
@@ -25,6 +27,17 @@ namespace ShiftPlanner.ViewModels
 
             _offsetDate = DateTime.Today;
             Days = StubInit();
+            PreviousMonthCommand = new RelayCommand(() =>
+            {
+                _offsetDate = _offsetDate.AddMonths(-1);
+                Days = StubInit();
+            });
+
+            NextMonthCommand = new RelayCommand(() =>
+            {
+                _offsetDate = _offsetDate.AddMonths(1);
+                Days = StubInit();
+            });
         }
 
         private IEnumerable<DayViewModel> StubInit()
@@ -45,6 +58,12 @@ namespace ShiftPlanner.ViewModels
         }
 
         public string DisplayedMonth => _offsetDate.ToString("MMMM yyyy");
+        public string NextMonthText => _offsetDate.AddMonths(1).ToString("MMM");
+        public string PreviousMonthText => _offsetDate.AddMonths(-1).ToString("MMM");
+        public string CurrentMonthText => _offsetDate.ToString("MMMM");
+
+        public ICommand PreviousMonthCommand { get; set; }
+        public ICommand NextMonthCommand { get; set; }
 
         public IEnumerable<DayViewModel> Days
         {
@@ -56,7 +75,14 @@ namespace ShiftPlanner.ViewModels
             {
                 if (value == _days) return;
                 _days = value;
-                if(_days != null) RaisePropertyChanged(nameof(Days));
+                if (_days != null)
+                {
+                    RaisePropertyChanged(nameof(Days));
+                    RaisePropertyChanged(nameof(CurrentMonthText));
+                    RaisePropertyChanged(nameof(PreviousMonthText));
+                    RaisePropertyChanged(nameof(NextMonthText));
+                    RaisePropertyChanged(nameof(DisplayedMonth));
+                }
             }
         }
 
