@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using ShiftPlanner.Utils;
 using SQLite;
@@ -12,11 +13,11 @@ namespace ShiftPlanner
         {
         }
 
-        public async Task<IEnumerable<Shift>> GetShiftsForMonth(DateTime month)
+        public async Task<IEnumerable<Shift>> GetShiftsForMonthInYear(DateTime monthAndYear)
         {
-            var conn = new SQLiteAsyncConnection(string.Format(Constants.Repository.DbNameTemplate, month.Year));
+            var conn = GetAsyncSQLiteConnection(monthAndYear);
 
-            var query =  conn.Table<Shift>().Where(s => s.Date.Month == month.Month);
+            var query =  conn.Table<Shift>().Where(s => s.Date.Month == monthAndYear.Month);
 
             List<Shift> result = await query.ToListAsync();
 
@@ -27,7 +28,15 @@ namespace ShiftPlanner
         {
             if (shift == null) throw new ArgumentNullException(nameof(shift));
 
-            throw new NotImplementedException();
+            var conn = GetAsyncSQLiteConnection(shift.Date);
+
+            await conn.InsertAsync(shift);
+        }
+
+        private SQLiteAsyncConnection GetAsyncSQLiteConnection(DateTime currentYear)
+        {
+            var conn = new SQLiteAsyncConnection(string.Format(Constants.Repository.DbNameTemplate, currentYear.Year));
+            return conn;
         }
     }
 }
