@@ -6,7 +6,7 @@
 *.user
 *.userosscache
 *.sln.docstates
-*.bak
+*.csproj.bak
 .DS_Store
 
 # User-specific files (MonoDevelop/Xamarin Studio)
