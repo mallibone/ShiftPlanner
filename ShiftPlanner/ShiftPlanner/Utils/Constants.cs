@@ -1,5 +1,4 @@
-﻿using System;
-namespace ShiftPlanner
+﻿namespace ShiftPlanner.Utils
 {
     public class Constants
     {

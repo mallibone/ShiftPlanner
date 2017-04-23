@@ -35,8 +35,8 @@ namespace ShiftPlanner.Services
 
         public IEnumerable<DayViewModel> GetMonth(DateTime monthRequested)
         {
-            var monthShifts = _repository.GetShiftsForMonth(monthRequested);
-            return monthShifts.Any() ? monthShifts : StubInit(monthRequested);
+            IEnumerable<Shift> monthShifts = _repository.GetShiftsForMonth(monthRequested);
+            return monthShifts.Any() ? monthShifts.Select(m => new DayViewModel(m)).ToList() : StubInit(monthRequested);
         }
         private IEnumerable<DayViewModel> StubInit(DateTime offsetDate)
         {

@@ -2,7 +2,7 @@
 using ShiftPlanner.Models;
 using SQLite;
 
-namespace ShiftPlanner
+namespace ShiftPlanner.Repository.Models
 {
     internal class Shift
     {

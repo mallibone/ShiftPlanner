@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
+using ShiftPlanner.Repository.Models;
 using ShiftPlanner.Utils;
 using SQLite;
 
-namespace ShiftPlanner
+namespace ShiftPlanner.Repository
 {
     internal class ShiftRepository
     {
