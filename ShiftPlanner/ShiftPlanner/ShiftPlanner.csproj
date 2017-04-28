@@ -57,7 +57,7 @@
     <Compile Include="Views\ShiftDetailPage.xaml.cs">
       <DependentUpon>ShiftDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Repository\Models\Shift.cs" />
+    <Compile Include="Repository\Models\ShiftDb.cs" />
     <Compile Include="Repository\ShiftRepository.cs" />
     <Compile Include="Utils\Constants.cs" />
   </ItemGroup>
@@ -95,13 +95,13 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Azure.Mobile, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.0.8.1\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Microsoft.Azure.Mobile.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.0.9.1\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Microsoft.Azure.Mobile.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Mobile.Analytics, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Analytics.0.8.1\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\\Microsoft.Azure.Mobile.Analytics.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Analytics.0.9.1\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Microsoft.Azure.Mobile.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Mobile.Crashes, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Crashes.0.8.1\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Microsoft.Azure.Mobile.Crashes.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Crashes.0.9.1\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Microsoft.Azure.Mobile.Crashes.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=3.13.9.1126, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.3.13.9\lib\portable-net45+win\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>

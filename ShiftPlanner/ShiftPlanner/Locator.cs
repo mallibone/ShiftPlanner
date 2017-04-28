@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using ShiftPlanner.Repository;
 using ShiftPlanner.Services;
 using ShiftPlanner.ViewModels;
 
@@ -17,6 +18,7 @@ namespace ShiftPlanner
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             //Services
             SimpleIoc.Default.Register<ShiftService>();
+            SimpleIoc.Default.Register<IRepository, ShiftRepository>();
 
             //ViewModels
             SimpleIoc.Default.Register<MainViewModel>();

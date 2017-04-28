@@ -10,7 +10,7 @@ using ShiftPlanner.Utils;
 
 namespace ShiftPlanner.ViewModels
 {
-    class MainViewModel:ViewModelBase
+    internal class MainViewModel : ViewModelBase
     {
         private readonly ShiftService _shiftService;
         private readonly INavigationService _navigationService;

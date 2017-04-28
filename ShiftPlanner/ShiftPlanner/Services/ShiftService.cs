@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ShiftPlanner.Models;
 using ShiftPlanner.Utils;
 using ShiftPlanner.ViewModels;
@@ -33,9 +34,9 @@ namespace ShiftPlanner.Services
             return _shiftTypes.Clone();
         }
 
-        public IEnumerable<DayViewModel> GetMonth(DateTime monthRequested)
+        public async Task<IEnumerable<DayViewModel>> GetMonth(DateTime monthRequested)
         {
-            IEnumerable<Shift> monthShifts = _repository.GetShiftsForMonth(monthRequested);
+            IEnumerable<Shift> monthShifts = await _repository.GetShiftsForMonthInYear(monthRequested);
             return monthShifts.Any() ? monthShifts.Select(m => new DayViewModel(m)).ToList() : StubInit(monthRequested);
         }
         private IEnumerable<DayViewModel> StubInit(DateTime offsetDate)
@@ -58,7 +59,7 @@ namespace ShiftPlanner.Services
 
     internal interface IRepository
     {
-        IEnumerable<Shift> GetShiftsForMonth(DateTime monthRequested);
+        Task<IEnumerable<Shift>> GetShiftsForMonthInYear(DateTime monthRequested);
     }
 
     internal class Shift
@@ -72,7 +73,7 @@ namespace ShiftPlanner.Services
 
     internal class StubRepository:IRepository
     {
-        public IEnumerable<Shift> GetShiftsForMonth(DateTime monthRequested)
+        public Task<IEnumerable<Shift>> GetShiftsForMonthInYear(DateTime monthRequested)
         {
             throw new NotImplementedException();
         }
