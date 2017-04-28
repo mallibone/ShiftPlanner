@@ -24,12 +24,13 @@ namespace ShiftPlanner.ViewModels
             if (navigationService == null) throw new ArgumentNullException(nameof(navigationService));
 
             _navigationService = navigationService;
-            SelectCalendarCommand = new RelayCommand(CalendarSelected, () => SelectedCalendar != null);
+            SelectCalendarCommand = new RelayCommand(CalendarSelected);
         }
 
         private void CalendarSelected()
         {
-            _navigationService.NavigateTo(nameof(MainPage), SelectedCalendar);
+			// todo save calendar
+            _navigationService.NavigateTo(nameof(MainPage));
         }
 
         public ObservableCollection<Calendar> Calendars { get; } = new ObservableCollection<Calendar>();
@@ -43,9 +44,14 @@ namespace ShiftPlanner.ViewModels
             {
                 if (value == _selectedCalendar) return;
                 _selectedCalendar = value;
+				HasSelectedCalendar = value != null;
                 RaisePropertyChanged(nameof(SelectedCalendar));
+				RaisePropertyChanged(nameof(HasSelectedCalendar));
+				RaisePropertyChanged(nameof(SelectCalendarCommand));
             }
         }
+
+		public bool HasSelectedCalendar { get; set;}
 
         public async Task Init()
         {
