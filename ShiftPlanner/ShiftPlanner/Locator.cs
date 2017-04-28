@@ -18,10 +18,13 @@ namespace ShiftPlanner
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             //Services
             SimpleIoc.Default.Register<ShiftService>();
+
+            // Repositories
             SimpleIoc.Default.Register<IRepository, ShiftRepository>();
 
             //ViewModels
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<ChooseCalendarViewModel>();
         }
 
         /// <summary>
@@ -31,5 +34,10 @@ namespace ShiftPlanner
             "CA1822:MarkMembersAsStatic",
             Justification = "This non-static member is needed for data binding purposes.")]
         public MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public ChooseCalendarViewModel ChooseCalendarViewModel => ServiceLocator.Current.GetInstance<ChooseCalendarViewModel>();
     }
 }
