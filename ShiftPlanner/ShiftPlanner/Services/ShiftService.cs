@@ -64,7 +64,6 @@ namespace ShiftPlanner.Services
 
     internal class Shift
     {
-        public int Id { get; set; }
         public DateTime DateChanged { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime Date { get; set; }
