@@ -6,7 +6,7 @@ using ShiftPlanner.Services;
 
 namespace ShiftPlanner.ViewModels
 {
-    class DayViewModel:ViewModelBase
+    class DayViewModel : ViewModelBase
     {
         private bool _freeShiftSelected;
         private bool _earlyShiftSelected;
@@ -24,12 +24,10 @@ namespace ShiftPlanner.ViewModels
 
         public DayViewModel(Shift shift)
         {
-            Id = shift.Id;
             Date = shift.Date;
             SelectedShiftType = shift.SelectedShiftType;
         }
 
-        public int Id { get; set; }
 
         public DateTime Date { get; set; }
         public string WeekDay => Date.ToString("dd ddd");

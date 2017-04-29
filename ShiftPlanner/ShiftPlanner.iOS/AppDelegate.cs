@@ -25,6 +25,11 @@ namespace ShiftPlanner.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             MobileCenter.Configure("50738204-da56-44e1-8efa-1ede5b58a77d");
+
+
+			//UITabBar.Appearance.SelectedImageTintColor = UIColor.FromRGB(0x3F, 0x51, 0xB5);
+			//UIViewCell.Appearance.TintColor = UIColor.FromRGB(0x60, 0x7D, 0x8B);
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

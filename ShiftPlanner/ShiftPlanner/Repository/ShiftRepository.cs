@@ -9,11 +9,11 @@ using SQLite;
 
 namespace ShiftPlanner.Repository
 {
-    internal class ShiftRepository : IRepository
+    internal class ShiftRepository : IShiftRepository
     {
         public async Task<IEnumerable<Shift>> GetShiftsForMonthInYear(DateTime monthAndYear)
         {
-            var conn = GetAsyncSQLiteConnection(monthAndYear);
+            var conn = await GetAsyncSQLiteConnection(monthAndYear);
 
             var query =  conn.Table<ShiftDb>().Where(s => s.Date.Month == monthAndYear.Month);
 
@@ -28,14 +28,17 @@ namespace ShiftPlanner.Repository
 
             var shiftDb = new ShiftDb(shift);
 
-            var conn = GetAsyncSQLiteConnection(shiftDb.Date);
+            var conn = await GetAsyncSQLiteConnection(shiftDb.Date);
 
             await conn.InsertAsync(shiftDb);
         }
 
-        private SQLiteAsyncConnection GetAsyncSQLiteConnection(DateTime currentYear)
+        private async Task<SQLiteAsyncConnection> GetAsyncSQLiteConnection(DateTime currentYear)
         {
             var conn = new SQLiteAsyncConnection(string.Format(Constants.Repository.DbNameTemplate, currentYear.Year));
+
+            await conn.CreateTableAsync<ShiftDb>();
+
             return conn;
         }
     }

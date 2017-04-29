@@ -34,9 +34,10 @@ namespace ShiftPlanner
             var navService = new NavigationService();
             navService.Configure(nameof(MainPage), typeof(MainPage));
             navService.Configure(nameof(ShiftDetailPage), typeof(ShiftDetailPage));
+            navService.Configure(nameof(ChooseCalendarPage), typeof(ChooseCalendarPage));
             SimpleIoc.Default.Register<INavigationService>(() => navService);
 
-            var mainPage = new NavigationPage(new MainPage());
+            var mainPage = new NavigationPage(new ChooseCalendarPage());
             navService.Initialize(mainPage);
             mainPage.BarBackgroundColor = (Color)Application.Current.Resources["PrimaryColor"];
             mainPage.BarTextColor = Color.White;

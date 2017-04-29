@@ -10,13 +10,13 @@ namespace ShiftPlanner.Services
 {
     class ShiftService
     {
-        private readonly IRepository _repository;
+        private readonly IShiftRepository _shiftRepository;
         private ICollection<ShiftType> _shiftTypes;
 
-        public ShiftService(IRepository repository)
+        public ShiftService(IShiftRepository shiftRepository)
         {
-            if (repository == null) throw new ArgumentNullException(nameof(repository));
-            _repository = repository;
+            if (shiftRepository == null) throw new ArgumentNullException(nameof(shiftRepository));
+            _shiftRepository = shiftRepository;
 
             _shiftTypes = new List<ShiftType>
             {
@@ -36,7 +36,7 @@ namespace ShiftPlanner.Services
 
         public async Task<IEnumerable<DayViewModel>> GetMonth(DateTime monthRequested)
         {
-            IEnumerable<Shift> monthShifts = await _repository.GetShiftsForMonthInYear(monthRequested);
+            IEnumerable<Shift> monthShifts = await _shiftRepository.GetShiftsForMonthInYear(monthRequested);
             return monthShifts.Any() ? monthShifts.Select(m => new DayViewModel(m)).ToList() : StubInit(monthRequested);
         }
         private IEnumerable<DayViewModel> StubInit(DateTime offsetDate)
@@ -57,21 +57,20 @@ namespace ShiftPlanner.Services
         }
     }
 
-    internal interface IRepository
+    internal interface IShiftRepository
     {
         Task<IEnumerable<Shift>> GetShiftsForMonthInYear(DateTime monthRequested);
     }
 
     internal class Shift
     {
-        public int Id { get; set; }
         public DateTime DateChanged { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime Date { get; set; }
         public ShiftType SelectedShiftType { get; set; }
     }
 
-    internal class StubRepository:IRepository
+    internal class StubShiftRepository:IShiftRepository
     {
         public Task<IEnumerable<Shift>> GetShiftsForMonthInYear(DateTime monthRequested)
         {

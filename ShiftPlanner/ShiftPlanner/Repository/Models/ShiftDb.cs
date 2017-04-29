@@ -15,6 +15,9 @@ namespace ShiftPlanner.Repository.Models
             ShiftType = shift.SelectedShiftType;
         }
 
+        public DateTime DateChanged { get; set; }
+        public DateTime DateCreated { get; set; }
+        [PrimaryKey]
         public DateTime Date { get; set; }
         public ShiftType ShiftType { get; set; }
     }
