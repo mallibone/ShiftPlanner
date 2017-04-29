@@ -44,6 +44,10 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Locator.cs" />
+    <Compile Include="Repository\CalendarRepository.cs" />
+    <Compile Include="Repository\Models\Calendar\CalendarDb.cs" />
+    <Compile Include="Repository\Models\Calendar\CalendarUsage.cs" />
+    <Compile Include="Services\CalendarService.cs" />
     <Compile Include="Utils\ExtensionUtils.cs" />
     <Compile Include="Services\ShiftService.cs" />
     <Compile Include="Utils\PageNavigationConstants.cs" />

@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using Plugin.Calendars;
+using Plugin.Calendars.Abstractions;
 using ShiftPlanner.Repository;
 using ShiftPlanner.Services;
 using ShiftPlanner.ViewModels;
@@ -17,10 +19,13 @@ namespace ShiftPlanner
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             //Services
+            SimpleIoc.Default.Register<ICalendars>(() => CrossCalendars.Current);
+            SimpleIoc.Default.Register<CalendarService>();
             SimpleIoc.Default.Register<ShiftService>();
 
             // Repositories
-            SimpleIoc.Default.Register<IRepository, ShiftRepository>();
+            SimpleIoc.Default.Register<IShiftRepository, ShiftRepository>();
+            SimpleIoc.Default.Register<CalendarRepository>();
 
             //ViewModels
             SimpleIoc.Default.Register<MainViewModel>();

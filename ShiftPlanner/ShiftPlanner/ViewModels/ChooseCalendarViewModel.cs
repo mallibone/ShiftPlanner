@@ -10,6 +10,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using Plugin.Calendars;
 using Plugin.Calendars.Abstractions;
+using ShiftPlanner.Services;
 using ShiftPlanner.Views;
 
 namespace ShiftPlanner.ViewModels
@@ -17,25 +18,46 @@ namespace ShiftPlanner.ViewModels
     class ChooseCalendarViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
+        private readonly CalendarService _calendarService;
         private Calendar _selectedCalendar;
+        private bool _isBusy;
 
-        public ChooseCalendarViewModel(INavigationService navigationService)
+        public ChooseCalendarViewModel(INavigationService navigationService, CalendarService calendarService)
         {
             if (navigationService == null) throw new ArgumentNullException(nameof(navigationService));
+            if (calendarService == null) throw new ArgumentNullException(nameof(calendarService));
 
             _navigationService = navigationService;
-            SelectCalendarCommand = new RelayCommand(CalendarSelected);
+            _calendarService = calendarService;
+            SelectCalendarCommand = new RelayCommand(CalendarSelected, () => HasSelectedCalendar && !IsBusy);
         }
 
-        private void CalendarSelected()
+        public bool IsBusy
         {
-			// todo save calendar
+            get { return _isBusy; }
+            set
+            {
+                if(value == _isBusy) return;
+                _isBusy = value;
+                RaisePropertyChanged(nameof(IsBusy));
+            }
+        }
+
+        private async void CalendarSelected()
+        {
+            IsBusy = true;
+            SelectCalendarCommand.RaiseCanExecuteChanged();
+
+            await _calendarService.StoreCurrentCalendar(SelectedCalendar);
             _navigationService.NavigateTo(nameof(MainPage));
+
+            IsBusy = false;
+            SelectCalendarCommand.RaiseCanExecuteChanged();
         }
 
         public ObservableCollection<Calendar> Calendars { get; } = new ObservableCollection<Calendar>();
 
-        public ICommand SelectCalendarCommand { get; set; }
+        public RelayCommand SelectCalendarCommand { get; set; }
 
         public Calendar SelectedCalendar
         {
@@ -47,7 +69,7 @@ namespace ShiftPlanner.ViewModels
 				HasSelectedCalendar = value != null;
                 RaisePropertyChanged(nameof(SelectedCalendar));
 				RaisePropertyChanged(nameof(HasSelectedCalendar));
-				RaisePropertyChanged(nameof(SelectCalendarCommand));
+                SelectCalendarCommand.RaiseCanExecuteChanged();
             }
         }
 
